@@ -1,16 +1,46 @@
-# React + Vite
+# Assignment 7 - Small Online Shop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a small online shop made with React and Vite. The products come from the DummyJSON API. The visitor can filter the products (the filter can be shared by link), open a detail page for each product, add products to a cart, and log in with a fake account to see the cart. The cart and the theme (light/dark) are remembered after a reload.
 
-Currently, two official plugins are available:
+## How to run
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```
+npm install
+npm run dev
+```
 
-## React Compiler
+Demo account: username is my student email, password is `demo123456`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## File organization
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+/assignment7
+ ├─ src/
+ │   ├─ api/
+ │   │   ├─ productsApi.js
+ │   │   └─ authApi.js
+ │   ├─ hooks/
+ │   │   ├─ useFetch.js
+ │   │   └─ useLocalStorage.js
+ │   ├─ context/
+ │   │   └─ AuthContext.jsx
+ │   ├─ store/
+ │   │   └─ cartStore.js
+ │   ├─ components/
+ │   │   ├─ Layout.jsx
+ │   │   ├─ NavBar.jsx
+ │   │   ├─ ProductCard.jsx
+ │   │   └─ ProtectedRoute.jsx
+ │   ├─ pages/
+ │   │   ├─ Home.jsx
+ │   │   ├─ ProductList.jsx
+ │   │   ├─ ProductDetail.jsx
+ │   │   ├─ Cart.jsx
+ │   │   ├─ Login.jsx
+ │   │   └─ NotFound.jsx
+ │   ├─ App.jsx
+ │   └─ main.jsx
+ |      index.css
+ ├─ index.html
+ └─ package.json
+```
