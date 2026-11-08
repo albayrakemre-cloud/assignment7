@@ -71,3 +71,20 @@ The `id` from `useParams()` is always a string, for example `"3"`, even if it lo
 On a plain static file server only `index.html` exists for `/`. When the user reloads `/products/3`, the server looks for a file at that path, does not find it, and returns 404. It works on the Vite dev server because it has a fallback that sends `index.html` for unknown paths, and then React Router shows the right page. On a static host I would need the same rule, which is to send all paths to `index.html`.
 
 
+## Notes on the self-study items
+
+- **Changing one query parameter without losing the others.** I checked the React Router documentation for `useSearchParams`. I learned that I can use `setSearchParams` with a function to get the previous parameters. I copied them using `new URLSearchParams(prev)` and changed only the parameter I needed. I also used `{ replace: true }` so every letter I type in the search box does not create a new history entry.
+
+- **Starting the store from localStorage safely.** Sometimes the saved data can be missing or incorrect. In `cartStore.js`, I used `try/catch` to handle errors when reading JSON. I also checked if the data is an array and if the items have the correct types. If something is wrong, the cart starts empty. For saving, I used Zustand's `subscribe` function so the data is saved when the items change.
+
+- **Light/dark theme.** In `Layout`, I added a class for the selected theme (`theme-light` or `theme-dark`). In `index.css`, I defined colors using CSS variables like `--bg` and `--text`. The whole app changes when the theme class changes. I also used my `useLocalStorage` hook to save the selected theme.
+
+## Challenges I faced
+
+- At first, my `App.jsx` still had the old Vite code. This caused an import error because some files were deleted. I fixed it by replacing the old code with my new code.
+
+- I learned that `fetch` does not give an error automatically when the server returns 404. I added a check with `response.ok` and used `throw new Error` to handle this problem. This helped me show "Product not found" on the detail page.
+
+- When I changed the category, my search text was disappearing. I fixed this by copying the previous query parameters before changing only the selected one.
+
+- When I opened different products quickly, sometimes an older request finished later and showed the wrong product. I used `AbortController` to cancel the previous request when the effect runs again. I also handled the `AbortError`.
